@@ -9,6 +9,6 @@
  */
 require_once '../vendor/autoload.php';
 
-use Lingua\LinguaDetect;
+use Lingua\LinguaDetect as Lingua;
 
-echo (new LinguaDetect())->test();
+echo (new Lingua('aligurbuz'))->set();
