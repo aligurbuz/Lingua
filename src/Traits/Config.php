@@ -14,6 +14,16 @@ trait Config {
     protected $handler;
 
     /**
+     * @var string
+     */
+    protected $locale='en';
+
+    /**
+     * @var string
+     */
+    protected $processPrefix='LinguaProcess';
+
+    /**
      * @param $handler
      */
     public function handler($handler){
@@ -21,5 +31,15 @@ trait Config {
         //set path for languages
         $this->handler=$handler;
     }
+
+    /**
+     * @param $locale
+     * @return $this
+     */
+    public function locale($locale) {
+        $this->locale=$locale;
+        return $this;
+    }
+
 
 }

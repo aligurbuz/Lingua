@@ -10,9 +10,10 @@ interface LinguaInterface {
     public function set();
 
     /**
+     * @param $stream
      * @return mixed
      */
-    public function get();
+    public function get($stream);
 
     /**
      * @return mixed

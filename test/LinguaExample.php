@@ -11,4 +11,6 @@ require_once '../vendor/autoload.php';
 
 use Lingua\LinguaDetect as Lingua;
 
-echo (new Lingua('aligurbuz'))->set();
+$realPath=__DIR__.'/../lang';
+
+echo (new Lingua($realPath))->get('message.linguaMessage');

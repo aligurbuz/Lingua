@@ -12,14 +12,15 @@ class LinguaDetect extends LinguaAbstract implements LinguaInterface {
      * @return mixed|string
      */
     public function set(){
-        return 'set';
+        return $this->getHandler();
     }
 
     /**
+     * @param $stream
      * @return mixed|string
      */
-    public function get(){
-        return 'get';
+    public function get($stream){
+        return $this->walk('get',$stream);
     }
 
     /**
