@@ -1,0 +1,12 @@
+{
+    "name": "aligurbuz/lingua",
+    "authors": [
+        {
+            "name": "aligurbuz",
+            "email": "galiant781@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/finder": "^4.0"
+    }
+}
