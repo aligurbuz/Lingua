@@ -8,5 +8,10 @@
     ],
     "require": {
         "symfony/finder": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lingua\\": "src/"
+        }
     }
 }
