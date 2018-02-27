@@ -2,6 +2,8 @@
 
 namespace Lingua\Traits;
 
+use Lingua\Lib\GetLinguaProcess;
+
 /**
  * Trait Config
  * @package Lingua\Traits
@@ -22,6 +24,19 @@ trait Config {
      * @var string
      */
     protected $processPrefix='LinguaProcess';
+
+    /**
+     * @var $stream
+     */
+    public $stream;
+
+    /**
+     * @var array
+     */
+    protected $processClasses=[
+        'GetLinguaProcess'=>getLinguaProcess::class,
+
+    ];
 
     /**
      * @param $handler

@@ -20,7 +20,7 @@ class LinguaDetect extends LinguaAbstract implements LinguaInterface {
      * @return mixed|string
      */
     public function get($stream){
-        return $this->walk('get',$stream);
+        return $this->walk('Get',$stream);
     }
 
     /**

@@ -4,23 +4,15 @@ namespace Lingua\Lib;
 abstract class LinguaProcessIdentifier {
 
     /**
-     * @var $method
-     */
-    protected $method;
-
-    /**
      * @var $stream
      */
-    protected $stream;
+    protected $streamContext;
 
     /**
      * LinguaProcessIdentifier constructor.
-     * @param $method
-     * @param $stream
+     * @param $app
      */
-    public function __construct($method,$stream) {
-
-        $this->method=$method;
-        $this->stream=$stream;
+    public function __construct($app) {
+        $this->streamContext=$app->stream;
     }
 }

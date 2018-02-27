@@ -3,7 +3,6 @@
 namespace Lingua;
 
 use Lingua\Traits\Config;
-use Lingua\Lib\getLinguaProcess;
 
 /**
  * Class LinguaAbstract
@@ -46,9 +45,27 @@ abstract class LinguaAbstract {
     public function walk($method,$stream){
 
         //
+        $this->stream=$stream;
+
+        //
         $process=$method.''.$this->processPrefix;
-        return (new $process($method,$stream))->handle();
+        $processClass=$this->getProcessClass($process);
+
+        //
+        return (new $processClass($this))->handle();
+
     }
+
+    private function getProcessClass($process){
+
+        //
+        if(isset($this->processClasses[$process]) AND $processClasses=$this->processClasses[$process]){
+            return $processClasses;
+        }
+
+        throw new \LogicException('stream handler error');
+    }
+
 
 
 }
