@@ -65,7 +65,7 @@ class ResolveStreamContext {
         $yamlFile=($yamlfile===null) ? $this->app->getFile() : $yamlfile;
 
         //read the specified stream yaml
-        return Yaml::parse($yamlFile.'.yaml');
+        return Yaml::parse(file_get_contents($yamlFile.'.yaml'));
     }
 
     /**
