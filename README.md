@@ -18,7 +18,7 @@ use Lingua\LinguaDetect as Lingua;
 
 ```
 
-> Include your Composer vendor autoload file and use the Lingua class as follows.You will assign the constructor object of the lingua class to the directory path
+> Include your Composer vendor autoload file and use the Lingua class as follows.The directory path you will assign the constructor object of the lingua class
                                                                                  is the main path to your language files. As long as you do not specify the locale method, the "en" directory is automatically appended to the main path.
 
 ```php
