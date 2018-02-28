@@ -24,8 +24,10 @@ use Lingua\LinguaDetect as Lingua;
 ```php
 
 //it is set to the as en value of default locale in the langdir directory.
+$lang=(new Lingua('path/to/langDir'));
+
 //It prints all the keys in message.yaml (in that path/to/langDir/en)
-echo (new Lingua('path/to/langDir'))->get('message');
+echo $lang->get('message');
 
 
 ```
