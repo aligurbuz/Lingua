@@ -13,6 +13,9 @@ use Lingua\Lingua;
 
 $realPath=__DIR__.'/../lang';
 
-echo (new Lingua($realPath))->include(['default'])->get('message.yummy');
+$result=(new Lingua($realPath))->include(['default'])->get('message.yummy');
+echo '<pre>';
+print_r($result);
+echo '</pre>';
 
 

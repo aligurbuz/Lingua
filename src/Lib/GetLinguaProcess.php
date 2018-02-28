@@ -12,8 +12,7 @@ class GetLinguaProcess extends LinguaProcessIdentifier {
      * @return string
      */
     public function handle(){
-        $read=(new ResolveStreamContext($this))->read();
-        print_r($read);
+        return (new ResolveStreamContext($this))->read();
     }
 
 }
