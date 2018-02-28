@@ -5,7 +5,9 @@ Easily integrate and manage your language files.
 > It is a package that you can extensively manage your language files in the format of yaml. Under this package you can easily include your language files in your application code as defined in the package usage.
 
 # Installation:
-> Composer require aligurbuz/lingua
+```bash
+$ composer require aligurbuz/lingua
+```
 
 # Usage
 
