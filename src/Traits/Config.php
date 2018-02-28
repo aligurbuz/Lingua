@@ -38,6 +38,12 @@ trait Config {
     /**
      * @var array
      */
+    public $param=array();
+
+
+    /**
+     * @var array
+     */
     public $processClasses=[
         'GetLinguaProcess'=>getLinguaProcess::class,
 

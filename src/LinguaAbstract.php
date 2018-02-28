@@ -40,12 +40,14 @@ abstract class LinguaAbstract {
     /**
      * @param $method
      * @param $stream
+     * @param $param array
      * @return mixed
      */
-    public function walk($method,$stream){
+    public function walk($method,$stream,$param){
 
         //
         $this->stream=$stream;
+        $this->param=$param;
 
         //
         $process=$method.''.$this->processPrefix;

@@ -36,10 +36,14 @@ class ResolveStreamContext {
             $realParseFile=$this->addIncludeFile($parseFile);
             $index=$this->app->getIndex();
 
-            if($index===null){
-                return $realParseFile;
-            }
-            return $realParseFile[$index];
+            return $this->checkParamForStream($parseFile,function() use ($realParseFile,$index) {
+
+                if($index===null){
+                    return $realParseFile;
+                }
+                return $realParseFile[$index];
+            });
+
 
         } catch (ParseException $e) {
             throw new \InvalidArgumentException($e->getMessage());
@@ -68,5 +72,29 @@ class ResolveStreamContext {
             return $parseFile;
 
         }
+    }
+
+
+    /**
+     * @param $file
+     * @param callable $callback
+     * @return mixed
+     */
+    private function checkParamForStream($file,callable $callback){
+
+        //
+        if(count($param=$this->app->app->param)>0){
+
+            $list=[];
+            foreach ($file as $key=>$value){
+                if(in_array($key,$param)){
+                    $list[$key]=$value;
+                }
+            }
+
+            return $list;
+        }
+
+        return call_user_func($callback);
     }
 }
