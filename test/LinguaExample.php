@@ -13,4 +13,6 @@ use Lingua\LinguaDetect as Lingua;
 
 $realPath=__DIR__.'/../lang';
 
-echo (new Lingua($realPath))->include(['default'])->get('message');
+echo (new Lingua($realPath))->include(['default'])->get('message.lingua');
+
+

@@ -43,3 +43,15 @@ echo $lang->get('message',['foo','bar']);
 
 
 ```
+
+
+> Sometimes when you search for a key in a language file
+  you may want to determine if it is also included in a file that is automatically included.
+  automatically finds the key in the language file to be added and brings it to you.
+
+```php
+
+//It prints all the keys in message.yaml and default.yaml (in that path/to/langDir/en)
+echo $lang->include(['default'])->get('message');
+
+```
