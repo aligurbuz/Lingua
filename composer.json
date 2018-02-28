@@ -14,6 +14,5 @@
         "psr-4": {
             "Lingua\\": "src/"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
