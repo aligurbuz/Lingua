@@ -41,7 +41,7 @@ class ResolveStreamContext {
                 if($index===null){
                     return $realParseFile;
                 }
-                return $realParseFile[$index];
+                return (isset($realParseFile[$index])) ? $realParseFile[$index] : null;
             });
 
 
@@ -69,9 +69,9 @@ class ResolveStreamContext {
                     $parseFile[$key]=$value;
                 }
             }
-            return $parseFile;
-
         }
+
+        return $parseFile;
     }
 
 
