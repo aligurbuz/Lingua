@@ -29,13 +29,9 @@ $lang=(new Lingua('path/to/langDir'));
 //It prints all the keys in message.yaml (in that path/to/langDir/en)
 echo $lang->get('message');
 
-
-```
-
-```php
-
 //it is set to the as fr in the langdir directory.
 //It prints all the keys in message.yaml (in that path/to/langDir/fr)
-echo (new Lingua('path/to/langDir'))->locale('fr')->get('message');
+echo $lang->locale('fr')->get('message');
+
 
 ```
