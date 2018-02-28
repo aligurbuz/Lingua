@@ -7,7 +7,7 @@
         }
     ],
     "require": {
-        "symfony/finder": "^4.0.x-dev",
+        "symfony/finder": "^4.0",
         "symfony/yaml": "2.*"
     },
     "autoload": {
