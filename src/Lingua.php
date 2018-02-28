@@ -9,19 +9,22 @@ namespace Lingua;
 class Lingua extends LinguaAbstract implements LinguaInterface {
 
     /**
-     * @return mixed|string
-     */
-    public function set(){
-        return $this->getHandler();
-    }
-
-    /**
      * @param $stream
      * @param $param array
      * @return mixed|string
      */
     public function get($stream,$param=array()){
+
+        //The get method is the method used to get
+        //the key from the specified file for lingua.
         return $this->walk('Get',$stream,$param);
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function set(){
+        return 'set';
     }
 
     /**
