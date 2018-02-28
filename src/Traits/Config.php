@@ -13,17 +13,22 @@ trait Config {
     /**
      * @var $handler
      */
-    protected $handler;
+    public $handler;
 
     /**
      * @var string
      */
-    protected $locale='en';
+    public $locale='en';
+
+    /**
+     * @var array
+     */
+    public $include=[];
 
     /**
      * @var string
      */
-    protected $processPrefix='LinguaProcess';
+    public $processPrefix='LinguaProcess';
 
     /**
      * @var $stream
@@ -33,7 +38,7 @@ trait Config {
     /**
      * @var array
      */
-    protected $processClasses=[
+    public $processClasses=[
         'GetLinguaProcess'=>getLinguaProcess::class,
 
     ];
@@ -53,6 +58,15 @@ trait Config {
      */
     public function locale($locale) {
         $this->locale=$locale;
+        return $this;
+    }
+
+    /**
+     * @param array $include
+     * @return $this
+     */
+    public function include($include=array()){
+        $this->include=$include;
         return $this;
     }
 

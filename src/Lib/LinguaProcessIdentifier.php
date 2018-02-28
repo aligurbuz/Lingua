@@ -6,13 +6,44 @@ abstract class LinguaProcessIdentifier {
     /**
      * @var $stream
      */
-    protected $streamContext;
+    public $app;
+
+    public $resolveStream;
 
     /**
      * LinguaProcessIdentifier constructor.
-     * @param $app
+     * @param $app \Lingua\LinguaDetect
      */
     public function __construct($app) {
-        $this->streamContext=$app->stream;
+        $this->app=$app;
+    }
+
+    /**
+     * @method resolve
+     */
+    public function resolve(){
+        $this->resolveStream=ParseLinguaStream::resolveStream($this->app);
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContext(){
+        return $this->resolveStream;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFile(){
+        return $this->app->streamHandler().'/'.$this->resolve()->getContext()->file;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIndex(){
+        return $this->resolve()->getContext()->index;
     }
 }

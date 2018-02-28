@@ -8,9 +8,12 @@ namespace Lingua\Lib;
  */
 class GetLinguaProcess extends LinguaProcessIdentifier {
 
+    /**
+     * @return string
+     */
     public function handle(){
-
-        return $this->streamContext;
+        $read=(new ResolveStreamContext($this))->read();
+        print_r($read);
     }
 
 }
