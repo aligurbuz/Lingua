@@ -12,7 +12,7 @@ abstract class LinguaProcessIdentifier {
 
     /**
      * LinguaProcessIdentifier constructor.
-     * @param $app \Lingua\LinguaDetect
+     * @param $app \Lingua\Lingua
      */
     public function __construct($app) {
         $this->app=$app;

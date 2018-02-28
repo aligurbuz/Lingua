@@ -5,7 +5,7 @@ namespace Lingua\Lib;
 class ParseLinguaStream {
 
     /**
-     * @param $app \Lingua\LinguaDetect
+     * @param $app \Lingua\Lingua
      * @return mixed
      */
     public static function resolveStream($app){

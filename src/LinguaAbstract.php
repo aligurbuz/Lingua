@@ -13,7 +13,7 @@ abstract class LinguaAbstract {
     use Config;
 
     /**
-     * LinguaDetect constructor.
+     * Lingua constructor.
      * @param null $path
      */
     public function __construct($path=null){

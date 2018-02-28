@@ -3,10 +3,10 @@
 namespace Lingua;
 
 /**
- * Class LinguaDetect
+ * Class Lingua
  * @package Lingua
  */
-class LinguaDetect extends LinguaAbstract implements LinguaInterface {
+class Lingua extends LinguaAbstract implements LinguaInterface {
 
     /**
      * @return mixed|string

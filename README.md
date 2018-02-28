@@ -16,7 +16,7 @@ $ composer require aligurbuz/lingua
 ```php
 
 require_once '../vendor/autoload.php';
-use Lingua\LinguaDetect as Lingua;
+use Lingua\Lingua;
 
 ```
 

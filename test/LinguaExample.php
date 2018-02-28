@@ -9,10 +9,10 @@
  */
 require_once '../vendor/autoload.php';
 
-use Lingua\LinguaDetect as Lingua;
+use Lingua\Lingua as Lingua;
 
 $realPath=__DIR__.'/../lang';
 
-echo (new Lingua($realPath))->include(['default'])->get('message',['exclude'=>['yummy']]);
+echo (new Lingua($realPath))->include(['default'])->get('message.foo');
 
 
