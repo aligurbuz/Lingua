@@ -10,9 +10,21 @@ Easily integrate and manage your language files.
 # Usage
 
 > Include your Composer vendor autoload file and use the Lingua class as follows.
+
 ```php
 
 require_once '../vendor/autoload.php';
 use Lingua\LinguaDetect as Lingua;
+
+```
+
+> Include your Composer vendor autoload file and use the Lingua class as follows.You will assign the constructor object of the lingua class to the directory path
+                                                                                 is the main path to your language files. As long as you do not specify the locale method, the en directory is automatically appended to the "en" path.
+
+```php
+
+//it is set to the as en value of default locale in the langdir directory.
+//It prints all the keys in message.yaml (in that path/to/langDir/en)
+echo (new Lingua('path/to/langDir'))->get('message');
 
 ```
