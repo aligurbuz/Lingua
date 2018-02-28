@@ -114,7 +114,7 @@ class ResolveStreamContext {
                     $list[$key]=$value;
                 }
                 else{
-                    if(!in_array($key,$param['exclude'])){
+                    if(isset($param['exclude']) && !in_array($key,$param['exclude'])){
                         $list[$key]=$value;
                     }
                 }
