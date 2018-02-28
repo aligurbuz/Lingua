@@ -41,6 +41,10 @@ echo $lang->get('message.foo');
 //It prints keys specified in array as parameters in message.yaml (in that path/to/langDir/en)
 echo $lang->get('message',['foo','bar']);
 
+//if specified exclude as key in array as parameters in message.yaml (in that path/to/langDir/en)
+//In this case, the strings in the exclude array are removed from the called file.
+echo $lang->get('message',['exclude'=>['foo']);
+
 
 ```
 

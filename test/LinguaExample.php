@@ -13,6 +13,6 @@ use Lingua\LinguaDetect as Lingua;
 
 $realPath=__DIR__.'/../lang';
 
-echo (new Lingua($realPath))->include(['default'])->get('message.yummy');
+echo (new Lingua($realPath))->include(['default'])->get('message',['exclude'=>['yummy']]);
 
 

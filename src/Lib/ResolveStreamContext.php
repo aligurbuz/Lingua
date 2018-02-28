@@ -36,7 +36,7 @@ class ResolveStreamContext {
             $realParseFile=$this->addIncludeFile($parseFile);
             $index=$this->app->getIndex();
 
-            return $this->checkParamForStream($parseFile,function() use ($realParseFile,$index) {
+            return $this->checkParamForStream($realParseFile,function() use ($realParseFile,$index) {
 
                 if($index===null){
                     return $realParseFile;
@@ -87,8 +87,13 @@ class ResolveStreamContext {
 
             $list=[];
             foreach ($file as $key=>$value){
-                if(in_array($key,$param)){
+                if(!isset($param['exclude']) && in_array($key,$param)){
                     $list[$key]=$value;
+                }
+                else{
+                    if(!in_array($key,$param['exclude'])){
+                        $list[$key]=$value;
+                    }
                 }
             }
 
