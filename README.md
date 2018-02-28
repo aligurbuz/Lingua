@@ -35,5 +35,8 @@ echo $lang->get('message');
 //It prints all the keys in message.yaml (in that path/to/langDir/fr)
 echo $lang->locale('fr')->get('message');
 
+//It prints key called foo in message.yaml (in that path/to/langDir/fr)
+echo $lang->locale('fr')->get('message.foo');
+
 
 ```
