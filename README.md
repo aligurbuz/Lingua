@@ -47,7 +47,8 @@ echo $lang->get('message',['foo','bar']);
 
 > Sometimes when you search for a key in a language file
   you may want to determine if it is also included in a file that is automatically included.
-  automatically finds the key in the language file to be added and brings it to you.
+   If the called key does not exist in the specified file, it will check whether it exists automatically in the included file.
+       In fact, lingua will automatically join the two files here. The key you are looking for will be searched in a single array.
 
 ```php
 
