@@ -27,4 +27,13 @@ use Lingua\LinguaDetect as Lingua;
 //It prints all the keys in message.yaml (in that path/to/langDir/en)
 echo (new Lingua('path/to/langDir'))->get('message');
 
+
+```
+
+```php
+
+//it is set to the as fr in the langdir directory.
+//It prints all the keys in message.yaml (in that path/to/langDir/fr)
+echo (new Lingua('path/to/langDir'))->locale('fr')->get('message');
+
 ```
