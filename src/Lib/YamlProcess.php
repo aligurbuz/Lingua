@@ -18,9 +18,7 @@ class YamlProcess {
     public static function parse($yamlFile=null){
 
         try {
-
             return Yaml::parse(file_get_contents($yamlFile.'.yaml'));
-
         } catch (ParseException $e) {
             throw new \InvalidArgumentException($e->getMessage());
         }
