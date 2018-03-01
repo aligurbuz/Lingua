@@ -53,9 +53,15 @@ echo $lang->get('message',['exclude'=>['foo']);
   you may want to determine if it is also included in a file that is automatically included.
    If the called key does not exist in the specified file, it will check whether it exists automatically in the included file.
        In fact, lingua will automatically join the two files here. The key you are looking for will be searched in a single array.
-> In addition, in some cases you may want your auto-uploaded files to be in a directory.
-        In this case, you can use the includeDir method and, as you can see,
-        the search array will be included in all files in a directory.
+
+```diff
++  In addition, in some cases you may want your auto-uploaded files to be in a directory.
+          In this case, you can use the includeDir method and, as you can see,
+          the search array will be included in all files in a directory.
+
+```
+
+
 
 ```php
 
