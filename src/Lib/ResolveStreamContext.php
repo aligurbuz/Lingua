@@ -2,9 +2,6 @@
 
 namespace Lingua\Lib;
 
-use Symfony\Component\Yaml\Yaml;
-use Symfony\Component\Yaml\Exception\ParseException;
-
 /**
  * Class ResolveStreamContext
  * @package Lingua\Lib
@@ -15,6 +12,11 @@ class ResolveStreamContext {
      * @var $app
      */
     protected $app;
+
+    /**
+     * @var array
+     */
+    private $streamList=[];
 
     /**
      * ResolveStreamContext constructor.
@@ -29,30 +31,35 @@ class ResolveStreamContext {
      */
     public function read(){
 
-        try {
+        //we check for automatic files to be included.
+        //check index for stream
+        $realParseFile=$this->checkMultipleParseFile();
+        $index=$this->app->getIndex();
 
-            //we check for automatic files to be included.
-            //check index for stream
-            $realParseFile=$this->addIncludeFile($this->getYaml());
-            $index=$this->app->getIndex();
+        //If the parameter is sent by the client.
+        //In this case, we do parameter checking for the stream.
+        return $this->checkParamForStream($realParseFile,function() use ($realParseFile,$index) {
 
-            //If the parameter is sent by the client.
-            //In this case, we do parameter checking for the stream.
-            return $this->checkParamForStream($realParseFile,function() use ($realParseFile,$index) {
+            //if index is null
+            //all keys
+            if($index===null){
+                return $realParseFile;
+            }
 
-                //if index is null
-                //all keys
-                if($index===null){
-                    return $realParseFile;
-                }
+            //if index is not null,then return the specified key
+            return (isset($realParseFile[$index])) ? $realParseFile[$index] : null;
+        });
 
-                //if index is not null,then return the specified key
-                return (isset($realParseFile[$index])) ? $realParseFile[$index] : null;
-            });
+    }
 
-        } catch (ParseException $e) {
-            throw new \InvalidArgumentException($e->getMessage());
-        }
+    /**
+     * @return array
+     */
+    private function checkMultipleParseFile(){
+
+        $includeFile=$this->addIncludeFile($this->getYaml());
+        $includeDirFile=$this->addIncludeDirFile();
+        return array_merge($includeFile,$includeDirFile);
     }
 
     /**
@@ -65,7 +72,7 @@ class ResolveStreamContext {
         $yamlFile=($yamlfile===null) ? $this->app->getFile() : $yamlfile;
 
         //read the specified stream yaml
-        return Yaml::parse(file_get_contents($yamlFile.'.yaml'));
+        return YamlProcess::parse($yamlFile);
     }
 
     /**
@@ -82,12 +89,34 @@ class ResolveStreamContext {
 
             //loop for include array
             foreach ($include as $includeValue){
+                $this->loopStreamHandler($this->addStreamHandler($includeValue));
+            }
+        }
 
-                //parse for yaml the files will be included
-                $includeParseFile=$this->getYaml($this->app->app->streamHandler().'/'.$includeValue);
+        return array_merge($parseFile,$this->streamList);
+    }
 
-                foreach ($includeParseFile as $key=>$value){
-                    $parseFile[$key]=$value;
+    /**
+     * @return array
+     */
+    private function addIncludeDirFile(){
+
+        $parseFile=[];
+
+        //we take the variable of the file to be included.
+        $include=$this->app->app->includeDir;
+
+        //check include array
+        if(count($include)>0){
+
+            //loop for include array
+            foreach ($include as $includeDirValue){
+
+                //take files with glob for include directory
+                foreach (glob("".$this->addStreamHandler($includeDirValue)."/*.yaml") as $yamlFiles) {
+
+                    $this->loopStreamHandler($yamlFiles);
+                    $parseFile=$this->streamList;
                 }
             }
         }
@@ -125,5 +154,27 @@ class ResolveStreamContext {
 
         //if there is no param array
         return call_user_func($callback);
+    }
+
+    /**
+     * @param $dir
+     * @return string
+     */
+    private function addStreamHandler($dir){
+        return $this->app->app->streamHandler().'/'.$dir;
+    }
+
+    /**
+     * @param $dir
+     * @return void
+     */
+    private function loopStreamHandler($dir){
+
+        //stream handler for yaml parse
+        $loopStreamHandler=$this->getYaml(str_replace('.yaml','',$dir));
+
+        foreach ($loopStreamHandler as $key=>$value){
+            $this->streamList[$key]=$value;
+        }
     }
 }

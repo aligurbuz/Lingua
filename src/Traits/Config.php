@@ -26,6 +26,11 @@ trait Config {
     public $include=[];
 
     /**
+     * @var array
+     */
+    public $includeDir=[];
+
+    /**
      * @var string
      */
     public $processPrefix='LinguaProcess';
@@ -73,6 +78,15 @@ trait Config {
      */
     public function include($include=array()){
         $this->include=$include;
+        return $this;
+    }
+
+    /**
+     * @param array $include
+     * @return $this
+     */
+    public function includeDir($include=array()){
+        $this->includeDir=$include;
         return $this;
     }
 

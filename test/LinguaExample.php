@@ -13,7 +13,7 @@ use Lingua\Lingua;
 
 $realPath=__DIR__.'/../lang';
 
-$result=(new Lingua($realPath))->include(['default'])->get('message',['yummy']);
+$result=(new Lingua($realPath))->includeDir(['load'])->include(['default'])->get('message');
 echo '<pre>';
 print_r($result);
 echo '</pre>';
