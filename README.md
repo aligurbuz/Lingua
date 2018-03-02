@@ -18,6 +18,8 @@ $ composer require aligurbuz/lingua
 require_once '../vendor/autoload.php';
 use Lingua\Lingua;
 
+### Data Retrieving
+
 ```
 
 > Include your Composer vendor autoload file and use the Lingua class as follows.The directory path you will assign to constructor object of the lingua class
