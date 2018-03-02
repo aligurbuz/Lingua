@@ -64,9 +64,6 @@ echo $lang->include(['default'])->get('message');
 //It prints key that in default.yaml if there is no key specified in message.yaml (in that path/to/langDir/en)
 echo $lang->include(['default'])->get('message.foo');
 
-//It prints key that in both default.yaml and all files in load directory if there is no key specified in message.yaml (in that path/to/langDir/en)
-echo $lang->includeDir(['load'])->include(['default'])->get('message.foo');
-
 ```
 
 
