@@ -70,7 +70,7 @@ echo $lang->includeDir(['load'])->include(['default'])->get('message.foo');
 ```
 
 
->> In addition, in some cases you may want your auto-uploaded files to be in a directory.In this case, you can use the includeDir method and, as you can see,the search array will be included in all files in a directory.
+>> ###### In addition, in some cases you may want your auto-uploaded files to be in a directory.In this case, you can use the includeDir method and, as you can see,the search array will be included in all files in a directory.
 
 
 
