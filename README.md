@@ -27,7 +27,7 @@ use Lingua\Lingua;
 
 ```php
 
-//it is set to the as en value of default locale in the langdir directory.
+//it is set to the as "en" value of default locale in the langdir directory.
 $lang=(new Lingua('path/to/langDir'));
 
 //It prints all the keys in message.yaml (in that path/to/langDir/en)
