@@ -2,16 +2,23 @@
 
 namespace Lingua\Lib;
 
+use Lingua\Lingua;
+
 /**
- * Class ResolveStreamContext
+ * Class ResolveStreamGetContext
  * @package Lingua\Lib
  */
-class ResolveStreamContext {
+class ResolveStreamGetContext {
 
     /**
      * @var $app
      */
     protected $app;
+
+    /**
+     * @var $base \Lingua\Lingua
+     */
+    protected $base;
 
     /**
      * @var array
@@ -24,6 +31,7 @@ class ResolveStreamContext {
      */
     public function __construct($app) {
         $this->app=$app;
+        $this->base=$this->app->app;
     }
 
     /**
@@ -57,22 +65,11 @@ class ResolveStreamContext {
      */
     private function checkMultipleParseFile(){
 
-        $includeFile=$this->addIncludeFile($this->getYaml());
+        //the included files and the files in the directory are merging here.
+        //This includes the general features of the system.
+        $includeFile=$this->addIncludeFile($this->app->getYaml());
         $includeDirFile=$this->addIncludeDirFile();
         return array_merge($includeFile,$includeDirFile);
-    }
-
-    /**
-     * @param $yamlfile null
-     * @return mixed
-     */
-    private function getYaml($yamlfile=null){
-
-        //set yaml file
-        $yamlFile=($yamlfile===null) ? $this->app->getFile() : $yamlfile;
-
-        //read the specified stream yaml
-        return YamlProcess::parse($yamlFile);
     }
 
     /**
@@ -82,10 +79,10 @@ class ResolveStreamContext {
     private function addIncludeFile($parseFile){
 
         //we take the variable of the file to be included.
-        $include=$this->app->app->include;
+        $include=$this->base->include;
 
         //check include array
-        if(count($include)>0){
+        if($this->base->checkArrayInDirectory($include)){
 
             //loop for include array
             foreach ($include as $includeValue){
@@ -93,6 +90,8 @@ class ResolveStreamContext {
             }
         }
 
+        //we are merging the files included in
+        //the file requested by default with the file to be included.
         return array_merge($parseFile,$this->streamList);
     }
 
@@ -104,21 +103,20 @@ class ResolveStreamContext {
         $parseFile=[];
 
         //we take the variable of the file to be included.
-        $include=$this->app->app->includeDir;
+        $include=$this->base->includeDir;
 
         //check include array
-        if(count($include)>0){
+        if($this->base->checkArrayInDirectory($include)){
 
             //loop for include array
             foreach ($include as $includeDirValue){
 
-                //take files with glob for include directory
-                foreach (glob("".$this->addStreamHandler($includeDirValue)."/*.yaml") as $yamlFiles) {
-
-                    $this->loopStreamHandler($yamlFiles);
-                    $parseFile=$this->streamList;
-                }
+                //we use glob to get all the language files in the specified directory.
+                //path globPathPattern
+                $globPathPattern=$this->addStreamHandler($includeDirValue)."/*.".$this->base->langFileExtension;
+                $parseFile=$this->getPathsWithGlob($globPathPattern);
             }
+
         }
 
         return $parseFile;
@@ -133,7 +131,7 @@ class ResolveStreamContext {
     private function checkParamForStream($file,callable $callback){
 
         //if available param array
-        if(count($param=$this->app->app->param)>0){
+        if(count($param=$this->base->param)>0){
 
             $list=[];
             foreach ($file as $key=>$value){
@@ -143,12 +141,13 @@ class ResolveStreamContext {
                     $list[$key]=$value;
                 }
                 else{
-                    if(isset($param['exclude']) && !in_array($key,$param['exclude'])){
-                        $list[$key]=$value;
-                    }
+
+                    //if the specified key is not in the exclude list, we get it again.
+                    if(!in_array($key,$param['exclude'])) $list[$key]=$value;
                 }
             }
 
+            //return list
             return $list;
         }
 
@@ -161,7 +160,9 @@ class ResolveStreamContext {
      * @return string
      */
     private function addStreamHandler($dir){
-        return $this->app->app->streamHandler().'/'.$dir;
+
+        //With the streamHandler method we get the directory path.
+        return $this->base->streamHandler().'/'.$dir;
     }
 
     /**
@@ -171,10 +172,32 @@ class ResolveStreamContext {
     private function loopStreamHandler($dir){
 
         //stream handler for yaml parse
-        $loopStreamHandler=$this->getYaml(str_replace('.yaml','',$dir));
+        $loopStreamHandler=$this->app->getYaml($this->base->stripLangFileExtension($dir));
 
-        foreach ($loopStreamHandler as $key=>$value){
-            $this->streamList[$key]=$value;
+        //if loopStreamHandler is array
+        if($this->base->checkArrayInDirectory($loopStreamHandler)){
+
+            //set as key and value to stream list object
+            foreach ($loopStreamHandler as $key=>$value){
+                $this->streamList[$key]=$value;
+            }
+        }
+
+    }
+
+    /**
+     * @param null $path
+     * @return array
+     */
+    private function getPathsWithGlob($path=null){
+
+        //loop files with glob
+        foreach (glob($path) as $files) {
+
+            //After recording the stream list objesine keys,
+            //we return the streamlist object.
+            $this->loopStreamHandler($files);
+            return $this->streamList;
         }
     }
 }

@@ -11,6 +11,11 @@ use Lingua\Lib\GetLinguaProcess;
 trait Config {
 
     /**
+     * @var string
+     */
+    public $langFileExtension='yaml';
+
+    /**
      * @var $handler
      */
     public $handler;
@@ -88,6 +93,22 @@ trait Config {
     public function includeDir($include=array()){
         $this->includeDir=$include;
         return $this;
+    }
+
+    /**
+     * @param $data
+     * @return bool
+     */
+    public function checkArrayInDirectory($data){
+        return (is_array($data) AND count($data)>0) ? true : false;
+    }
+
+    /**
+     * @param null $file
+     * @return mixed
+     */
+    public function stripLangFileExtension($file=null){
+        return str_replace('.'.$this->langFileExtension,'',$file);
     }
 
 

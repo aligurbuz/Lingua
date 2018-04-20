@@ -17,10 +17,11 @@ class YamlProcess {
      */
     public static function parse($yamlFile=null){
 
-        try {
-            return Yaml::parse(file_get_contents($yamlFile.'.yaml'));
-        } catch (ParseException $e) {
-            throw new \InvalidArgumentException($e->getMessage());
+        //The Symfony Yaml component is very simple and consists of two main classes:
+        //one parses YAML strings (Parser), and the other dumps a PHP array to a YAML string (Dumper)
+        //The parse() method parses a YAML string and converts it to a PHP array
+        if(file_exists($yamlFile=$yamlFile.'.yaml')){
+            return Yaml::parse(file_get_contents($yamlFile));
         }
 
     }

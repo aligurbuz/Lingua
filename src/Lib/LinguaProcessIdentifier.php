@@ -11,6 +11,16 @@ abstract class LinguaProcessIdentifier {
     public $resolveStream;
 
     /**
+     * @var $base
+     */
+    public $base;
+
+    /**
+     * @var array
+     */
+    public $streamList=[];
+
+    /**
      * LinguaProcessIdentifier constructor.
      * @param $app \Lingua\Lingua
      */
@@ -38,6 +48,19 @@ abstract class LinguaProcessIdentifier {
      */
     public function getFile(){
         return $this->app->streamHandler().'/'.$this->resolve()->getContext()->file;
+    }
+
+    /**
+     * @param $yamlfile null
+     * @return mixed
+     */
+    public function getYaml($yamlfile=null){
+
+        //set yaml file
+        $yamlFile=($yamlfile===null) ? $this->getFile() : $yamlfile;
+
+        //read the specified stream yaml
+        return YamlProcess::parse($yamlFile);
     }
 
     /**
