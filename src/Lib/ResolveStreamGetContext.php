@@ -90,6 +90,10 @@ class ResolveStreamGetContext {
             }
         }
 
+        // if the parseFile value is null,
+        // we have to assign this value an empty value by default for array_merge.
+        if($parseFile===null) $parseFile=[];
+
         //we are merging the files included in
         //the file requested by default with the file to be included.
         return array_merge($parseFile,$this->streamList);
