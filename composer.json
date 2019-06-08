@@ -7,8 +7,8 @@
         }
     ],
     "require": {
-        "symfony/finder": "^4.0",
-        "symfony/yaml": "2.*"
+        "symfony/finder": "dev-master",
+        "symfony/yaml": "dev-master"
     },
     "autoload": {
         "psr-4": {
